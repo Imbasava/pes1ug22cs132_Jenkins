@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 sh '''
-                git config --global user.email "imbasavanayak@gmail.com.com"
+                git config --global user.email "imbasavanayak@gmail.com"
                 git config --global user.name "imbasava"
                 git add .
                 git commit -m "Added working .cpp file"
