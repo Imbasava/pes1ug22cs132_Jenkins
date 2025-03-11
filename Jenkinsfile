@@ -22,7 +22,7 @@ pipeline {
                 git config --global user.name "imbasava"
                 git add .
                 git commit -m "Added working .cpp file"
-                git push origin main
+                git push origin master
                 '''
             }
         }
