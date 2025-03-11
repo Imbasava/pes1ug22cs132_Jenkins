@@ -5,7 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'g++ -o output pes1ug22cs132.cpp'
+                    // Intentional error: Referencing a nonexistent file
+                    sh 'g++ -o output nonexistent_file.cpp'
                 }
             }
         }
