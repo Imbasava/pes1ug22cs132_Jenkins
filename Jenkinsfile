@@ -1,35 +1,37 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Build') {
             steps {
-                script {
-                    sh 'g++ -o pes1ug22cs132-1 pes1ug22cs132.cpp'
-                }
+                echo 'Building...'
+                sh 'g++ pes1ug22cs132.cpp -o pes1ug22cs132-1'
             }
         }
-        
         stage('Test') {
             steps {
-                script {
-                    sh './pes1ug22cs132-1'
-                }
+                echo 'Testing...'
+                sh './pes1ug22cs132-1'
             }
         }
-        
         stage('Deploy') {
             steps {
-                script {
-                    sh 'git add .'
-                    sh 'git commit -m "Added working .cpp file"'
-                    sh 'git push origin main'
-                }
+                echo 'Deploying...'
+                sh '''
+                git config --global user.email "imbasavanayak@gmail.com.com"
+                git config --global user.name "imbasava"
+                git add .
+                git commit -m "Added working .cpp file"
+                git push origin main
+                '''
             }
         }
     }
-    
+
     post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
         failure {
             echo 'Pipeline failed'
         }
