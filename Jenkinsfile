@@ -1,37 +1,37 @@
 pipeline {
     agent any
+    
     stages {
-        // stage('Clone repository') {
-        //     steps {
-        //         checkout([$class: 'GitSCM',
-        //         branches: [[name: '*/main']],
-        //         userRemoteConfigs: [[url: 'https://github.com/Imbasava/pes1ug22cs132_Jenkins.git']]])
-        //     }
-        // }
-
         stage('Build') {
             steps {
-                build 'PES1UG22CS132'
-                sh 'g++ PES1UG22CS132.cpp -o PES1UG22CS132'
+                script {
+                    sh 'g++ -o pes1ug22cs132-1 pes1ug22cs132.cpp'
+                }
             }
         }
-
+        
         stage('Test') {
             steps {
-                sh './PES1UG22CS132'
+                script {
+                    sh './pes1ug22cs132-1'
+                }
             }
         }
-
+        
         stage('Deploy') {
             steps {
-                echo 'deploy'
+                script {
+                    sh 'git add .'
+                    sh 'git commit -m "Added working .cpp file"'
+                    sh 'git push origin main'
+                }
             }
         }
     }
-
+    
     post {
         failure {
-            error "Pipeline failed"
+            echo 'Pipeline failed'
         }
     }
 }
